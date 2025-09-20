@@ -1,7 +1,7 @@
 using System;
 using HealthcareManagementAPI.models;
 
-namespace HealthcareManagementAPI.Models
+namespace HealthcareManagementAPI.models
 {
     public class Appointment
     {

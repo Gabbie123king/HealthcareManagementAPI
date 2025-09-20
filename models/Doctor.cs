@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace HealthcareManagementAPI.Models
+namespace HealthcareManagementAPI.models
 {
     public class Doctor
     {
