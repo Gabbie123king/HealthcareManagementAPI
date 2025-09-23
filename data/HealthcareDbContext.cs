@@ -26,6 +26,8 @@ namespace HealthcareManagementAPI.data
             modelBuilder.Entity<Patient>()
                 .HasIndex(p => p.Email)
                 .IsUnique();
+
+            
         }
     }
 }

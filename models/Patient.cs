@@ -9,8 +9,15 @@ namespace HealthcareManagementAPI.models
     public class Patient
     {
         public Guid PatientId { get; set; }
-        public string? FirsName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        private DateTime? _dateOfBirth;
+        public DateTime? DateOfBirth
+        {
+            get => _dateOfBirth;
+            set => _dateOfBirth = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : null;
+        }
+
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public ICollection<Appointment>? Appointments { get; set; }
