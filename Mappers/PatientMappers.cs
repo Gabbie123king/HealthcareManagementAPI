@@ -21,15 +21,14 @@ namespace HealthcareManagementAPI.Mappers
             };
         }
 
-        public static Patient ToPatienFromCreatetDto(this CreatePatientRequestDto patientsdto)
+        public static Patient ToPatientFromCreatetDto(this CreatePatientRequestDto patientsdto)
         {
             return new Patient
             {
                 FirstName = patientsdto.FirstName,
                 LastName = patientsdto.LastName,
                 Email = patientsdto.Email,
-                PhoneNumber = patientsdto.PhoneNumber
-
+                PhoneNumber = patientsdto.PhoneNumber,
             };
         }
     }

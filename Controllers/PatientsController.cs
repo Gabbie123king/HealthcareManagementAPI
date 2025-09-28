@@ -49,5 +49,26 @@ namespace HealthcareManagementAPI.Controllers
                 patientDto
             );
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update(
+            [FromRoute] Guid id,
+            [FromBody] UpdatePatientRequestDto updatedto
+        )
+        {
+            var patientModel = _context.Patients.FirstOrDefault(x => x.PatientId == id);
+            if (patientModel == null)
+            {
+                return NotFound();
+            }
+            patientModel.FirstName = updatedto.FirstName;
+            patientModel.LastName = updatedto.LastName;
+            patientModel.Email = updatedto.Email;
+            patientModel.PhoneNumber = updatedto.PhoneNumber;
+
+            _context.SaveChanges();
+            return Ok(patientModel.ToPatientDto());
+        }
     }
 }
