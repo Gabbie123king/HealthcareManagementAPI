@@ -20,6 +20,7 @@ namespace HealthcareManagementAPI.Controllers
 
         public PatientsController(HealthcareDbContext context) => _context = context;
 
+        // Get All Patient's Details
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -28,6 +29,7 @@ namespace HealthcareManagementAPI.Controllers
             return Ok(patientsdto);
         }
 
+        // Get Patient Details by ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -37,6 +39,7 @@ namespace HealthcareManagementAPI.Controllers
             return Ok(patient.ToPatientDto());
         }
 
+        // Add a new Patient
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePatientRequestDto patientDto)
         {
@@ -50,9 +53,10 @@ namespace HealthcareManagementAPI.Controllers
             );
         }
 
+        // Update patient Details by ID
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update(
+        public IActionResult Update(
             [FromRoute] Guid id,
             [FromBody] UpdatePatientRequestDto updatedto
         )
@@ -69,6 +73,21 @@ namespace HealthcareManagementAPI.Controllers
 
             _context.SaveChanges();
             return Ok(patientModel.ToPatientDto());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete([FromRoute] Guid id)
+        {
+            var patientModel = _context.Patients.FirstOrDefault(x => x.PatientId == id);
+            if (patientModel == null)
+            {
+                return NotFound();
+            }
+            _context.Patients.Remove(patientModel);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
